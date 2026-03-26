@@ -3,7 +3,7 @@ databaseChangeLog:
       id: 01-create-person
       author: montealegrejose254@gmail.com
       context: billing
-      labels: HU-02-dev
+      labels: HU-03-dev
       comment: person creation
       changes:
         - sqlFile:
@@ -13,5 +13,21 @@ databaseChangeLog:
       rollback:
         - sqlFile:
             path: 11_rollbacks/01_tables/01-create-person-rollback.sql
-  - tagDatabase:
-      tag: v1.0.1
+
+    
+
+  - changeSet:
+
+      id: 02-create-rol
+      author: montealegrejose254@gmail.com
+      context: billing
+      labels: HU-03-dev
+      comment: rol creation
+      changes:
+        - sqlFile:
+            path: 01_tables/02-create-rol.sql
+            endDelimiter: \nGO
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: 11_rollbacks/01_tables/02-create-rol-rollbacks.sql
