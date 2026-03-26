@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
 
   db:
@@ -20,12 +19,11 @@ services:
     depends_on:
       - db
     volumes:
-      - ./liquibase:/liquibase/changelog
-    working_dir: /liquibase/changelog
-    entrypoint: ["sh", "-c"]
+      - ./:/liquibase/project              # 👈 MONTA TODO el proyecto
+      - ./liquibase:/liquibase/config      # 👈 properties + driver
+    working_dir: /liquibase/project
     command: >
-      "sleep 10 &&
-       liquibase --defaultsFile=liquibase.properties update"
+      sh -c "sleep 10 && liquibase --classpath=/liquibase/config/driver/postgresql-42.7.9.jar --defaultsFile=/liquibase/config/liquibase.properties update"
 
 volumes:
   pgdata:
